@@ -1,6 +1,7 @@
 amq-docker
 ==============
-Based on amq-docker repository by noelo: https://github.com/noelo/amq-docker.git
+Based on amq-docker repository by noelo: https://github.com/noelo/amq-docker
+Updated to use Ubuntu as base image and supervisord to run ssh and activemq
 
 This project builds a [docker](http://docker.io/) container for running Apache ActiveMQ message broker. It can be also used to form clusters of activeMQ brokers. Multiple protocols are supported i.e. MQTT, AMQP 1.0, Openwire and web sockets
 
