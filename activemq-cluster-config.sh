@@ -1,11 +1,12 @@
-#!/bin/bash 
+#!/bin/bash
+cd /home/activemq/apache-activemq/conf
 CLUSTER_NODES=$(env|grep ":61616"|grep -v `hostname -i`|cut -d \= -f 2)
 NC_DUPLEX=$(env|grep "NC_DUPLEX")
-declare -i NC_TTL 
+declare -i NC_TTL
 NC_TTL=$(env|grep "NC_TTL"|cut -d \= -f 2)
 
 if [ -z $NC_DUPLEX ]
-then 
+then
 	NC_DUPLEX=false
 else
 	NC_DUPLEX=true
@@ -17,7 +18,7 @@ then
 fi
 
 sed -i "s/brokerName=\"localhost\"/brokerName=\"\$\{activemq.brokername\}\"/g" activemq.xml
-	
+
 if [ -z $CLUSTER_NODES ]
 then
 	cp activemq.xml activemq-run.xml
@@ -40,4 +41,4 @@ sed -i '/<\/persistenceAdapter>/a<plugins><statisticsBrokerPlugin\/><connectionD
 
 env
 cat activemq-run.xml
-/home/activemq/apache-activemq-5.9.0/bin/activemq console -Dactivemq.brokername=$HOSTNAME xbean:file:./activemq-run.xml
+/home/activemq/apache-activemq/bin/activemq console -Dactivemq.brokername=$HOSTNAME xbean:file:./activemq-run.xml
